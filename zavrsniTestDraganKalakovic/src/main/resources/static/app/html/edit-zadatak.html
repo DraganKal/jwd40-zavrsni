@@ -1,0 +1,37 @@
+<div ng-controller="EditZadatakCtrl">
+<br>
+<br>
+<br>
+<form>
+		<div class="form-group">
+			<label for="rime">Ime</label>
+			<input class="form-control" id="rime" ng-model="zadatak.ime" />
+		</div>
+		<div class="form-group">
+			<label for="rzaduzeni">Zaduzeni</label>
+			<input class="form-control" id="rzaduzeni" ng-model="zadatak.zaduzeni"/>
+		</div>
+		<div class="form-group">
+			<label for="rbodovi">Bodovi</label>
+			<input class="form-control" id="rbodovi" ng-model="zadatak.bodovi"/>
+		</div>
+		<div class="form-group">
+			<label for="rstanja">Stanje</label>
+			<select class="form-control" ng-model="zadatak.stanjeId" id="rstanja">
+				<option ng-repeat="s in stanja" value="{{s.id}}" ng-selected="s.id == zadatak.stanjeId">{{s.ime}}</option>
+			</select>
+		</div>
+
+		
+		<div class="form-group">
+			<label for="rsprintovi">Sprint</label>
+			<select class="form-control" ng-model="zadatak.sprintId" id="rsprintovi">
+				<option ng-repeat="s in sprintovi" value="{{s.id}}" ng-selected="s.id == zadatak.sprintId">{{s.ime}}</option>
+			</select>
+		</div>
+
+		
+		<button class="btn btn-primary" ng-click="doEdit()">Izmeni</button>
+	</form>
+
+</div>

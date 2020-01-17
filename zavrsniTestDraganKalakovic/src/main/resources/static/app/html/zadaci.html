@@ -1,0 +1,92 @@
+<div ng-controller="ZadaciCtrl">
+<br>
+<br>
+<br>
+
+	
+<h3>Dodavanje novog zadatka</h3>
+<form>
+		<div class="form-group">
+			<label for="rime">Ime</label>
+			<input class="form-control" id="rime" ng-model="zadatak.ime" />
+		</div>
+		<div class="form-group">
+			<label for="rzaduzeni">Zaduzeni</label>
+			<input class="form-control" id="rzaduzeni" ng-model="zadatak.zaduzeni"/>
+		</div>
+		<div class="form-group">
+			<label for="rbodovi">Bodovi</label>
+			<input class="form-control" id="rbodovi" ng-model="zadatak.bodovi" placeholder="0-20"/>
+		</div>
+		<div class="form-group">
+			<label for="rstanja">Stanje</label>
+			<select class="form-control" ng-model="zadatak.stanjeId" id="rstanja">
+				<option ng-repeat="s in stanja" value="{{s.id}}">{{s.ime}}</option>
+			</select>
+		</div>
+
+		
+		<div class="form-group">
+			<label for="rsprintovi">Sprint</label>
+			<select class="form-control" ng-model="zadatak.sprintId" id="rsprintovi">
+				<option ng-repeat="s in sprintovi" value="{{s.id}}">{{s.ime}}</option>
+			</select>
+		</div>
+		
+		<button class="btn btn-primary"  ng-click="doAdd()">Dodaj</button>
+	</form>
+	<input type="checkbox" ng-model="search">Prikazi formu za pretragu<br>
+	<div ng-show="search">
+		<div class="w-50 p-3">
+			<form>
+				<div class="form-group">
+					<label for="sime">ime zadatka</label>
+					<input ng-model="sParams.ime" id="sime" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="sprint">Sprint</label>
+					<select class="form-control" ng-model="sParams.sprintId" id="sprint">
+						<option ng-repeat="s in sprintovi" value="{{s.id}}">{{s.ime}}</option>
+					</select>
+				</div>
+				<button ng-click="doSearch()" class="btn btn-primary">Pretrazi</button>
+				<button ng-click="doClear()" class="btn btn-primary">Ponisti</button>
+			</form>
+		</div>
+	</div>
+
+
+<div class="btn-group float-right">
+		<button ng-disabled="pageNum == 0" ng-click="changePage(-1)" class="btn btn-info">Prehodna</button>
+		<button ng-disabled="pageNum == totalPages - 1" ng-click="changePage(1)" class="btn btn-info">Sledeca</button>
+		
+	</div>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>ime</th>
+				<th>Zaduzeni</th>
+				<th>Bodovi</th>
+				<th>Stanje</th>
+				<th>Sprint</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="z in zadaci">
+				<td>{{z.ime}}</td>
+				<td>{{z.zaduzeni}}</td>
+				<td>{{z.bodovi}}</td>
+				<td>{{z.stanjeNaziv}}</td>
+				<td>{{z.sprintNaziv}}</td>
+				<td>
+					<button class="btn btn-success" ng-disabled="z.stanjeId == 3" ng-click="doPredji(z.id)">Predji na sledece stanje</button>
+					<button class="btn btn-warning" ng-click="goToEdit(z.id)">Edit</button>
+					<button class="btn btn-danger" ng-click="doObrisi(z.id)">Delete</button>
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+</div>
